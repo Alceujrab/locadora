@@ -1,7 +1,7 @@
 services:
   - type: web
     name: locadora-backend
-    env: node
+    runtime: node
     rootDir: backend
     plan: free
     buildCommand: npm ci
@@ -58,23 +58,25 @@ services:
       - key: META_WABA_PHONE_NUMBER_ID
         sync: false
 
-  - type: static_site
+  - type: web
     name: locadora-frontend
+    runtime: static
     rootDir: frontend
     plan: free
     buildCommand: npm ci && npm run build
-    publishPath: dist
+    staticPublishPath: dist
     envVars:
       # Ajuste para apontar para a URL pública do backend (preencher após criar o backend)
       - key: VITE_API_URL
         sync: false
 
-  - type: static_site
+  - type: web
     name: locadora-admin
+    runtime: static
     rootDir: admin
     plan: free
     buildCommand: npm ci && npm run build
-    publishPath: dist
+    staticPublishPath: dist
     envVars:
       # Ajuste para apontar para a URL pública do backend (preencher após criar o backend)
       - key: VITE_API_URL
